@@ -7,6 +7,10 @@ class ShippingCalculator {
     calculate(packageDetails) {
         // TODO: Call the `calculate` method on the currently set strategy object.
         // Pass the `packageDetails` to it and return the result.
+        if (!this.strategy) {
+            throw new Error("Shipping strategy not set.");
+        }
+        return this.strategy.calculate(packageDetails);
     }
 }
 
@@ -21,6 +25,7 @@ class ShippingStrategy {
 class FlatRateStrategy extends ShippingStrategy {
     calculate(packageDetails) {
         // TODO: Return a fixed shipping cost, e.g., 10.
+        return 10;
     }
 }
 
@@ -29,6 +34,8 @@ class WeightBasedStrategy extends ShippingStrategy {
     calculate(packageDetails) {
         // TODO: Return a cost based on the package weight.
         // For example, $3 per kilogram. `packageDetails.weight` will be in kg.
+        const ratePerKg = 3;
+        return packageDetails.weight * ratePerKg;
     }
 }
 
